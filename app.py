@@ -137,13 +137,13 @@ if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
 if not st.session_state["authenticated"]:
-    st.title("⚡ NET-GRID OPERATOR LOGIN")
-    st.write("Secure mainframe access node.")
+    st.title("⚡ CYBER OPERATOR LOGIN")
+    st.write("Secure access.")
     
-    username_input = st.text_input("Mainframe Identity Token (Username)")
-    password_input = st.text_input("Decrypt Key Phrase (Password)", type="password")
+    username_input = st.text_input("Username")
+    password_input = st.text_input("Password", type="password")
     
-    if st.button("INITIALIZE TERMINAL UPLINK"):
+    if st.button("INITIALIZE"):
         if username_input == "cyber_hacker" and password_input == "AnimePass2026!":
             st.session_state["authenticated"] = True
             st.rerun()
@@ -152,19 +152,19 @@ if not st.session_state["authenticated"]:
     st.stop()
 
 # 5. Core Operational Chat View (Launches when access state is true)
-st.title("🧬 CYBERPUNK ANIME NODE")
+st.title("🧬  ANIME ASSISTANT ")
 st.subheader("Autonomous Web-Crawl Intelligence main terminal")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "Hi! How are you? I'm your dedicated Anime Fandom Intelligence Agent. System connection secure. What deep story arc, character motivation, or hidden lore shall we uncover together today? ✨"}
+        {"role": "assistant", "content": "Hi! How are you? I'm your dedicated Anime Fandom Intelligence Agent. System connection secure.  ✨"}
     ]
 
 for message in st.session_state["messages"]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-if user_query := st.chat_input("Enter search vector parameter..."):
+if user_query := st.chat_input("Enter search..."):
     
     with st.chat_message("user"):
         st.write(user_query)
