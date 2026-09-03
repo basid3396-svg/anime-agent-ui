@@ -1,7 +1,7 @@
 # app.py
 import streamlit as st
 import streamlit.components.v1 as components
-from langchain_community.llms import Ollama
+from langchain_groq import ChatGroq
 from tools import search_anime_web
 
 # 1. Inject Advanced Cyberpunk Styling and Cyber Blast Regular Font Configuration
@@ -173,7 +173,7 @@ if user_query := st.chat_input("Enter search..."):
     with st.chat_message("assistant"):
         with st.spinner("CRUNCHING SYSTEM LOGS & CRAWLING CORE NETWORKS..."):
             try:
-                llm = Ollama(model="llama3")
+                llm = ChatGroq(model="llama3-8b-8192", api_key=st.secrets["GROQ_API_KEY"])
                 scraped_data_context = search_anime_web.invoke(user_query)
                 
                 final_structured_prompt = (
@@ -184,8 +184,8 @@ if user_query := st.chat_input("Enter search..."):
                 )
                 
                 agent_final_output = llm.invoke(final_structured_prompt)
-                st.write(agent_final_output)
-                st.session_state["messages"].append({"role": "assistant", "content": agent_final_output})
-                
+                st.write(agent_final_output.content)
+                st.session_state["messages"].append({"role": "assistant", "content": agent_final_output.content})
+       
             except Exception as e:
                 st.error(f"Uplink error occurred during agent compute execution loop: {str(e)}")
