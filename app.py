@@ -173,7 +173,7 @@ if user_query := st.chat_input("Enter search..."):
     with st.chat_message("assistant"):
         with st.spinner("CRUNCHING SYSTEM LOGS & CRAWLING CORE NETWORKS..."):
             try:
-                llm = ChatGroq(model="llama3-8b-8192", api_key=st.secrets["GROQ_API_KEY"])
+                llm = ChatGroq(model="llama-3.1-8b-instant", api_key=st.secrets["GROQ_API_KEY"])
                 scraped_data_context = search_anime_web.invoke(user_query)
                 
                 final_structured_prompt = (
